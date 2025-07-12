@@ -18,6 +18,9 @@ export const Colors = {
     coral: coralColor,
     blue: tintColorLight,
     white: '#fff',
+    textSecondary: '#687076',
+    border: '#E5E5E5',
+    error: '#FF3B30',
   },
   dark: {
     text: '#ECEDEE',
@@ -29,5 +32,8 @@ export const Colors = {
     coral: coralColor,
     blue: tintColorLight,
     white: '#fff',
+    textSecondary: '#9BA1A6',
+    border: '#2C2C2E',
+    error: '#FF453A',
   },
 };

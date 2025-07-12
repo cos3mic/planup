@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity, FlatList } from 'react-native';
-import { Colors } from '../../constants/Colors';
+import { Colors } from '../../constants/Colors.jsx';
 import { useColorScheme } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 

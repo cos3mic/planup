@@ -1,9 +1,10 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '../../constants/Colors';
+import { Colors } from '../../constants/Colors.jsx';
 import { useColorScheme } from 'react-native';
 import { Animated, View } from 'react-native';
 import { useRef, useEffect } from 'react';
+import UserAvatar from '../../components/UserAvatar';
 
 function TabBarIcon({ name, color, focused, size = 24 }) {
   const scaleAnim = useRef(new Animated.Value(1)).current;
@@ -48,6 +49,7 @@ export default function TabLayout() {
         headerTitleStyle: {
           fontWeight: 'bold',
         },
+        headerRight: () => <UserAvatar />,
       }}>
       <Tabs.Screen
         name="index"
@@ -91,6 +93,15 @@ export default function TabLayout() {
           title: 'Notifications',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name="notifications" color={color} focused={focused} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: 'Settings',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name="settings" color={color} focused={focused} />
           ),
         }}
       />
