@@ -37,6 +37,9 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_bGFyZ2UtbGFiLTczLmNsZXJrLmFjY291bnRzLmRldiQ"
     }
   }
 }

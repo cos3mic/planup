@@ -26,14 +26,15 @@ function TabBarIcon({ name, color, focused, size = 24 }) {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].coral,
-        tabBarInactiveTintColor: Colors[colorScheme ?? 'light'].icon,
+        tabBarActiveTintColor: colors.coral,
+        tabBarInactiveTintColor: colors.icon,
         tabBarStyle: {
-          backgroundColor: Colors[colorScheme ?? 'light'].white,
+          backgroundColor: colors.white,
           borderTopWidth: 1,
           borderTopColor: '#E5E5E5',
           height: 60,
@@ -41,9 +42,9 @@ export default function TabLayout() {
           paddingTop: 8,
         },
         headerStyle: {
-          backgroundColor: Colors[colorScheme ?? 'light'].blue,
+          backgroundColor: colors.blue,
         },
-        headerTintColor: Colors[colorScheme ?? 'light'].white,
+        headerTintColor: colors.white,
         headerTitleStyle: {
           fontWeight: 'bold',
         },

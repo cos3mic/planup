@@ -221,13 +221,14 @@ const styles = StyleSheet.create({
   statsContainer: {
     flexDirection: 'row',
     padding: 20,
-    gap: 12,
   },
   statCard: {
     flex: 1,
     padding: 16,
     borderRadius: 12,
     alignItems: 'center',
+    marginBottom: 12,
+    marginRight: 12,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
