@@ -1,15 +1,22 @@
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { Colors } from '../../constants/Colors.jsx';
-import { useColorScheme } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo';
-import { SignOutButton } from '../../components/SignOutButton';
+import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
+import { useState } from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import CreateIssueModal from '../../components/CreateIssueModal';
+import SearchModal from '../../components/SearchModal';
+import { SignOutButton } from '../../components/SignOutButton';
+import { Colors } from '../../constants/Colors.jsx';
 
 export default function HomeScreen() {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   const { user } = useUser();
+  const [isCreateIssueModalVisible, setIsCreateIssueModalVisible] = useState(false);
+  const [isSearchModalVisible, setIsSearchModalVisible] = useState(false);
+
+  // Get user's first name
+  const firstName = user?.firstName || user?.primaryEmailAddress?.emailAddress?.split('@')[0] || 'User';
 
   return (
     <>
@@ -17,16 +24,11 @@ export default function HomeScreen() {
         <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
           <View style={styles.header}>
             <Text style={[styles.welcomeText, { color: colors.text }]}>
-              Welcome to PlanUp
+              Welcome to PlanUp, {firstName}!
             </Text>
             <Text style={[styles.subtitle, { color: colors.text }]}>
               Your project management companion
             </Text>
-            {user && (
-              <Text style={[styles.userEmail, { color: colors.text }]}>
-                Signed in as: {user.primaryEmailAddress?.emailAddress}
-              </Text>
-            )}
           </View>
 
           <View style={styles.quickActions}>
@@ -35,12 +37,18 @@ export default function HomeScreen() {
             </Text>
             
             <View style={styles.actionGrid}>
-              <TouchableOpacity style={[styles.actionCard, { backgroundColor: colors.white, borderColor: colors.blue }]}>
+              <TouchableOpacity 
+                style={[styles.actionCard, { backgroundColor: colors.white, borderColor: colors.blue }]}
+                onPress={() => setIsCreateIssueModalVisible(true)}
+              >
                 <Ionicons name="add-circle" size={32} color={colors.coral} />
                 <Text style={[styles.actionText, { color: colors.text }]}>Create Issue</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={[styles.actionCard, { backgroundColor: colors.white, borderColor: colors.blue }]}>
+              <TouchableOpacity 
+                style={[styles.actionCard, { backgroundColor: colors.white, borderColor: colors.blue }]}
+                onPress={() => setIsSearchModalVisible(true)}
+              >
                 <Ionicons name="search" size={32} color={colors.coral} />
                 <Text style={[styles.actionText, { color: colors.text }]}>Search</Text>
               </TouchableOpacity>
@@ -88,6 +96,16 @@ export default function HomeScreen() {
 
           <SignOutButton />
         </ScrollView>
+
+        <CreateIssueModal 
+          visible={isCreateIssueModalVisible}
+          onClose={() => setIsCreateIssueModalVisible(false)}
+        />
+        
+        <SearchModal 
+          visible={isSearchModalVisible}
+          onClose={() => setIsSearchModalVisible(false)}
+        />
       </SignedIn>
 
       <SignedOut>

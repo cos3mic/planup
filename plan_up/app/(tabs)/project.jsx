@@ -1,7 +1,8 @@
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity, FlatList } from 'react-native';
-import { Colors } from '../../constants/Colors.jsx';
-import { useColorScheme } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useState } from 'react';
+import { FlatList, StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import CreateProjectModal from '../../components/CreateProjectModal';
+import { Colors } from '../../constants/Colors.jsx';
 
 const projectData = [
   {
@@ -41,6 +42,7 @@ const projectData = [
 export default function ProjectScreen() {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
+  const [isCreateProjectModalVisible, setIsCreateProjectModalVisible] = useState(false);
 
   const renderProjectCard = ({ item }) => (
     <TouchableOpacity style={[styles.projectCard, { backgroundColor: colors.white }]}>
@@ -85,7 +87,10 @@ export default function ProjectScreen() {
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
         <Text style={[styles.title, { color: colors.text }]}>Projects</Text>
-        <TouchableOpacity style={[styles.addButton, { backgroundColor: colors.coral }]}>
+        <TouchableOpacity 
+          style={[styles.addButton, { backgroundColor: colors.coral }]}
+          onPress={() => setIsCreateProjectModalVisible(true)}
+        >
           <Ionicons name="add" size={24} color={colors.white} />
         </TouchableOpacity>
       </View>
@@ -96,6 +101,11 @@ export default function ProjectScreen() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContainer}
         showsVerticalScrollIndicator={false}
+      />
+
+      <CreateProjectModal 
+        visible={isCreateProjectModalVisible}
+        onClose={() => setIsCreateProjectModalVisible(false)}
       />
     </View>
   );

@@ -1,8 +1,7 @@
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity, FlatList } from 'react-native';
-import { Colors } from '../../constants/Colors.jsx';
-import { useColorScheme } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
+import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { Colors } from '../../constants/Colors.jsx';
 
 const issueData = [
   {
@@ -133,14 +132,21 @@ export default function AllWorkScreen() {
             key={filter}
             style={[
               styles.filterTab,
-              selectedFilter === filter && { backgroundColor: colors.coral }
+              { 
+                backgroundColor: selectedFilter === filter ? colors.coral : 'transparent',
+                borderColor: selectedFilter === filter ? colors.coral : colors.border
+              }
             ]}
             onPress={() => setSelectedFilter(filter)}
           >
-            <Text style={[
-              styles.filterText,
-              { color: selectedFilter === filter ? colors.white : colors.text }
-            ]}>
+            <Text 
+              style={[
+                styles.filterText,
+                { color: selectedFilter === filter ? colors.white : colors.text }
+              ]}
+              numberOfLines={1}
+              adjustsFontSizeToFit={false}
+            >
               {filter}
             </Text>
           </TouchableOpacity>
@@ -202,21 +208,28 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     paddingHorizontal: 20,
+    marginBottom: 10,
   },
   filterContent: {
     paddingRight: 20,
+    alignItems: 'center',
   },
   filterTab: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     borderRadius: 20,
-    marginRight: 8,
+    marginRight: 12,
     borderWidth: 1,
     borderColor: '#E5E5E5',
+    minWidth: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   filterText: {
     fontSize: 14,
     fontWeight: '600',
+    textAlign: 'center',
+    flexShrink: 0,
   },
   statsContainer: {
     flexDirection: 'row',
